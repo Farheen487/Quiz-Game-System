@@ -29,3 +29,90 @@ Object-Oriented Programming (OOP)
 Classes and Objects
 Encapsulation
 Functions and Modular Design
+
+Code:
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Question {
+private:
+    string question;
+    string optionA, optionB, optionC, optionD;
+    char correctAnswer;
+
+public:
+    Question(string q, string a, string b,
+             string c, string d, char answer) {
+        question = q;
+        optionA = a;
+        optionB = b;
+        optionC = c;
+        optionD = d;
+        correctAnswer = answer;
+    }
+
+    void displayQuestion() {
+        cout << "\n" << question << endl;
+        cout << "A. " << optionA << endl;
+        cout << "B. " << optionB << endl;
+        cout << "C. " << optionC << endl;
+        cout << "D. " << optionD << endl;
+    }
+
+    bool checkAnswer(char userAnswer) {
+        return (toupper(userAnswer) == toupper(correctAnswer));
+    }
+};
+
+int main() {
+    int score = 0;
+    char answer;
+
+    Question q1(
+        "1. What is the capital of Pakistan?",
+        "Karachi", "Lahore", "Islamabad", "Peshawar", 'C');
+
+    Question q2(
+        "2. Which language is used for OOP?",
+        "C++", "HTML", "SQL", "CSS", 'A');
+
+    Question q3(
+        "3. How many days are there in a week?",
+        "5", "6", "7", "8", 'C');
+
+    Question quiz[] = {q1, q2, q3};
+
+    cout << "==================================" << endl;
+    cout << "      QUIZ GAME SYSTEM" << endl;
+    cout << "==================================" << endl;
+
+    for (int i = 0; i < 3; i++) {
+        quiz[i].displayQuestion();
+
+        cout << "Enter your answer (A/B/C/D): ";
+        cin >> answer;
+
+        if (quiz[i].checkAnswer(answer)) {
+            cout << "Correct Answer!" << endl;
+            score++;
+        } else {
+            cout << "Wrong Answer!" << endl;
+        }
+    }
+
+    cout << "\n==================================" << endl;
+    cout << "Quiz Completed!" << endl;
+    cout << "Your Score: " << score << " / 3" << endl;
+
+    if (score == 3)
+        cout << "Excellent!" << endl;
+    else if (score == 2)
+        cout << "Good Job!" << endl;
+    else
+        cout << "Keep Practicing!" << endl;
+
+    cout << "==================================" << endl;
+
+    return 0;
+}
